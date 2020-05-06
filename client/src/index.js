@@ -22,4 +22,3 @@ const app = (
 );
 
 ReactDom.render(app, document.getElementById('root'));
-register();
