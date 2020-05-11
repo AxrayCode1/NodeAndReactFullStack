@@ -11,6 +11,11 @@ module.exports = app => {
         res.send('Thanks for voting!')
     });
 
+    app.post('/api/surveys/webhooks', (req, res) => {
+        console.log(req.body);
+        res.send({});
+    })
+
     app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
         const { title, subject, body, recipients } = req.body;
         const survey = new Survey({
@@ -20,8 +25,7 @@ module.exports = app => {
             recipients: recipients.split(',').map(email => ({ email: email.trim() })),
             _user: req.user.id,
             dateSent: Date.now()
-        });
-
+        });        
         //Great place to send a email!        
         const mailer = new Mailer(survey, template(survey));
         try{        
