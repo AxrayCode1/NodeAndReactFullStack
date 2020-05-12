@@ -65,9 +65,9 @@ module.exports = app => {
             dateSent: Date.now()
         });        
         //Great place to send a email!        
-        // const mailer = new Mailer(survey, template(survey));
+        const mailer = new Mailer(survey, template(survey));
         try{        
-            // await mailer.send();
+            await mailer.send();
             await survey.save();
             req.user.credits -= 1;
             // console.log(req.user);
